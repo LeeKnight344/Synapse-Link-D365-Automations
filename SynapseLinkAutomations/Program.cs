@@ -1,27 +1,10 @@
-﻿class Program
-{
-    static async Task Main(string[] args)
-    {
-        if (args.Length < 3)
-        {
-            Console.WriteLine("Usage: dotnet run <environmentGuid> <username> <password>");
-            return;
-        }
+﻿var builder = WebApplication.CreateBuilder(args);
 
-        string environmentGuid = args[0];
-        string username = args[1];
-        string password = args[2];
+// Add services to the container
+builder.Services.AddControllers();
 
-        string token = await BearerTokenFetcher.FetchBearerToken(environmentGuid, username, password);
+var app = builder.Build();
 
-        if (!string.IsNullOrEmpty(token))
-        {
-            Console.WriteLine("Retrieved Bearer Token:");
-            Console.WriteLine(token);
-        }
-        else
-        {
-            Console.WriteLine("Failed to retrieve Bearer Token.");
-        }
-    }
-}
+app.MapControllers();
+
+app.Run();
