@@ -1,0 +1,75 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "eastus"
+        },
+        "networkInterfaceName": {
+            "value": "rg-aps-hub-devtest-api-host711"
+        },
+        "enableAcceleratedNetworking": {
+            "value": true
+        },
+        "networkSecurityGroupName": {
+            "value": "rg-aps-hub-devtest-api-host-nsg"
+        },
+        "networkSecurityGroupRules": {
+            "value": []
+        },
+        "subnetName": {
+            "value": "snet-integration-001"
+        },
+        "virtualNetworkId": {
+            "value": "/subscriptions/a514d8ea-8aec-437b-856c-72af018292b9/resourceGroups/rg-net-dev-001/providers/Microsoft.Network/virtualNetworks/vnet-dev-eastus"
+        },
+        "virtualMachineName": {
+            "value": "rg-aps-hub-devtest-api-host"
+        },
+        "virtualMachineComputerName": {
+            "value": "rg-aps-hub-devt"
+        },
+        "virtualMachineRG": {
+            "value": "rg-aps-hub-devtest-01"
+        },
+        "osDiskType": {
+            "value": "StandardSSD_LRS"
+        },
+        "osDiskDeleteOption": {
+            "value": "Delete"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_DS1_v2"
+        },
+        "nicDeleteOption": {
+            "value": "Detach"
+        },
+        "hibernationEnabled": {
+            "value": false
+        },
+        "adminUsername": {
+            "value": "APSAPIHostDevTest130"
+        },
+        "adminPassword": {
+            "value": null
+        },
+        "patchMode": {
+            "value": "AutomaticByOS"
+        },
+        "enablePeriodicAssessment": {
+            "value": "ImageDefault"
+        },
+        "enableHotpatching": {
+            "value": false
+        },
+        "securityType": {
+            "value": "TrustedLaunch"
+        },
+        "secureBoot": {
+            "value": true
+        },
+        "vTPM": {
+            "value": true
+        }
+    }
+}

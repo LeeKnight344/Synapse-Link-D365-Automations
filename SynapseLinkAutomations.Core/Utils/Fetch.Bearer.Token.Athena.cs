@@ -27,8 +27,11 @@ public class BearerTokenFetcher
 
         var options = new EdgeOptions();
         options.AddArgument("--proxy-server=127.0.0.1:8000");
-        options.AddArgument("start-maximized");
+        options.AddArgument("--headless=new");
+        options.AddArgument("--disable-gpu");   
+        options.AddArgument("start-maximized"); 
         options.AcceptInsecureCertificates = true;
+
 
         using var driver = new EdgeDriver(options);
 

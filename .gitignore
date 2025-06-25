@@ -1,3 +1,8 @@
 SynapseLinkAutomations/bin/*
 SynapseLinkAutomations/obj/*
 
+SynapseLinkAutomations.Core/bin/Release/*
+SynapseLinkAutomations.Core/obj/Release/*
+SynapseLinkAutomations.Core/obj/*
+SynapseLinkAutomations.Core/bin/*
+
