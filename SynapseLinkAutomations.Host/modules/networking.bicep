@@ -14,9 +14,15 @@ resource AZ_Vnet_Name_Resource 'Microsoft.Network/virtualNetworks@2023-02-01' = 
     }
     subnets: [
       {
-        name: AZ_Subnet_Name
+        name: 'snet-synapse-api'
         properties: {
           addressPrefix: '100.64.1.0/28'
+        }
+      }
+      {
+        name: 'snet-logicapp'
+        properties: {
+          addressPrefix: '100.64.0.240/28'
         }
       }
     ]

@@ -35,8 +35,8 @@ module vmModule 'modules/vm.bicep' = {
 
 
 
-module SynapseAutomationAPI 'modules/SynapseAutomationAPI.bicep' = {
-  name: 'SynapseAutomationAPI'
+module synapselinkapi 'modules/synapselinkapi.bicep' = {
+  name: 'synapselinkapi'
   params: {
     AZ_VM_Name: AZ_VM_Name
     AZ_Resource_Location: AZ_Resource_Location
