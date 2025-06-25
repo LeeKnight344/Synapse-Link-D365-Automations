@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynapseLinkAutomations", "SynapseLinkAutomations\SynapseLinkAutomations.csproj", "{36FFD960-AD88-DE85-BAD2-872ED5BA2E4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynapseLinkAutomations", "SynapseLinkAutomations.Core\SynapseLinkAutomations.csproj", "{36FFD960-AD88-DE85-BAD2-872ED5BA2E4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
