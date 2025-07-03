@@ -28,6 +28,7 @@ namespace SynapseLinkAutomations.Core.Services
             proxyServer.SetAsSystemProxy(explicitEndPoint, ProxyProtocolType.Http | ProxyProtocolType.Https);
 
             var options = new EdgeOptions();
+            options.AddArgument("--ignore-certificate-errors");
             options.AddArgument("--proxy-server=127.0.0.1:8000");
             options.AddArgument("--headless=new");
             options.AddArgument("--disable-gpu");
