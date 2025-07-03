@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using SynapseLinkAutomations.Core.Services;
 
-namespace Synapse.Controllers
+namespace SynapseLinkAutomations.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -18,7 +19,11 @@ namespace Synapse.Controllers
 
             try
             {
-                var token = await BearerTokenFetcher.FetchBearerToken(request.EnvironmentGuid, request.Username, request.Password);
+                var token = await BearerTokenFetcher.FetchBearerToken(
+                    request.EnvironmentGuid,
+                    request.Username,
+                    request.Password
+                );
 
                 if (string.IsNullOrWhiteSpace(token))
                     return StatusCode(500, "Bearer token was not captured.");
@@ -34,8 +39,8 @@ namespace Synapse.Controllers
 
     public class TokenRequest
     {
-        public string EnvironmentGuid { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public string? EnvironmentGuid { get; set; }
+        public string? Username { get; set; }
+        public string? Password { get; set; }
     }
 }

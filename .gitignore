@@ -6,3 +6,8 @@ SynapseLinkAutomations.Core/obj/Release/*
 SynapseLinkAutomations.Core/obj/*
 SynapseLinkAutomations.Core/bin/*
 
+SynapseLinkAutomations.Api/bin/Release/*
+SynapseLinkAutomations.Api/obj/Release/*
+SynapseLinkAutomations.Api/obj/*
+SynapseLinkAutomations.Api/bin/*
+SynapseLinkAutomations.Api/appsettings.Development.json
