@@ -26,19 +26,17 @@ jobs:
         run: |
           dotnet build $env:APP_PACKAGE_PATH --configuration Release --output ./output/SynapseLinkAPI_Compiled
 
+      - name: Compress Output Folder
+        shell: pwsh
+        run: |
+          Compress-Archive -Path ./output/SynapseLinkAPI_Compiled/* -DestinationPath ./output/SynapseLinkAPI_Compiled.zip
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.2
         with:
           name: SynapseLinkAPI_Compiled
-          path: ./output/**
+          path: ./output/SynapseLinkAPI_Compiled.zip
           if-no-files-found: error
-
-      - name: Create Release Tag
-        id: tag
-        shell: pwsh
-        run: |
-          $tag = "v1.0.${{ github.run_number }}"
-          echo "RELEASE_TAG=$tag" >> $env:GITHUB_ENV
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -46,7 +44,7 @@ jobs:
           tag_name: ${{ env.RELEASE_TAG }}
           name: "Release ${{ env.RELEASE_TAG }}"
           body: "Automated release for commit ${{ github.sha }}"
-          files: ./output/**
+          files: ./output/SynapseLinkAPI_Compiled.zip
         env:
           GITHUB_TOKEN: ${{ secrets.ACTIONS_SECRET }}
 
@@ -55,6 +53,7 @@ jobs:
         with:
           draft: false
           generate_release_notes: true
-          files: ./output/**
+          files: ./output/SynapseLinkAPI_Compiled.zip
         env:
           GITHUB_TOKEN: ${{ secrets.ACTIONS_SECRET }}
+
