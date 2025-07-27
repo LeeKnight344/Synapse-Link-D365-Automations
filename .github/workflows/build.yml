@@ -24,7 +24,7 @@ jobs:
       - name: Build Project
         shell: pwsh
         run: |
-          dotnet build $env:APP_PACKAGE_PATH --configuration Release --output ./output
+          dotnet build $env:APP_PACKAGE_PATH --configuration Release --output ./output/SynapseLinkAPI_Compiled
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.2
