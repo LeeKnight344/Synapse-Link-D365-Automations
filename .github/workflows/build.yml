@@ -31,6 +31,7 @@ jobs:
         run: |
           Compress-Archive -Path ./output/SynapseLinkAPI_Compiled/* -DestinationPath ./output/SynapseLinkAPI_Compiled.zip
 
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.2
         with:
@@ -44,7 +45,7 @@ jobs:
         run: |
           $tag = "v1.0.${{ github.run_number }}"
           echo "RELEASE_TAG=$tag" >> $env:GITHUB_ENV
-          
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
@@ -60,7 +61,6 @@ jobs:
         with:
           draft: false
           generate_release_notes: true
-          files: ./output/SynapseLinkAPI_Compiled.zip
+          files: ./output/**
         env:
           GITHUB_TOKEN: ${{ secrets.ACTIONS_SECRET }}
-
