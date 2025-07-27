@@ -38,6 +38,13 @@ jobs:
           path: ./output/SynapseLinkAPI_Compiled.zip
           if-no-files-found: error
 
+      - name: Create Release Tag
+        id: tag
+        shell: pwsh
+        run: |
+          $tag = "v1.0.${{ github.run_number }}"
+          echo "RELEASE_TAG=$tag" >> $env:GITHUB_ENV
+          
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
