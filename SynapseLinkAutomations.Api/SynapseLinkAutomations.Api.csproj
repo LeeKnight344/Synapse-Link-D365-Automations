@@ -21,7 +21,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Content Include="Utils\msedgedriver.exe">
+    <Content Include="msedgedriver.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
