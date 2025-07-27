@@ -5,7 +5,7 @@ on:
     branches: ["main"]
 
 env:
-  DOTNET_VERSION: '8.0.x'  # Specify the .NET version
+  DOTNET_VERSION: '9.0.x' 
   APP_PACKAGE_PATH: 'SynapseLinkAutomations.Api\SynapseLinkAutomations.Api.csproj'
 
 jobs:
@@ -29,6 +29,6 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.6.2
       with:
-        name: SynapseLinkCompiledOutput
+        name: SynapseLinkAPI_Compiled
         path: ./output/**
         if-no-files-found: error
