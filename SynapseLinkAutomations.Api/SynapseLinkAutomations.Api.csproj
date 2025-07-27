@@ -19,6 +19,14 @@
     <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="138.0.3351.95" />
     <PackageReference Include="Titanium.Web.Proxy" Version="3.2.0" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="Utils\msedgedriver.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 
   <ItemGroup>
     <ProjectReference Include="..\SynapseLinkAutomations.Core\SynapseLinkAutomations.csproj" />
