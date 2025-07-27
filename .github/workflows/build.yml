@@ -5,23 +5,30 @@ on:
     branches: ["main"]
 
 env:
-  APP_PACKAGE_PATH: 'SynapseLinkAutomations.Api\SynapseLinkAutomations.Api.csproj'       
+  DOTNET_VERSION: '8.0.x'  # Specify the .NET version
+  APP_PACKAGE_PATH: 'SynapseLinkAutomations.Api\SynapseLinkAutomations.Api.csproj'
+
 jobs:
   build-and-deploy:
     runs-on: windows-latest 
     environment: dev
     steps:
-    - name: 'Checkout GitHub Action'
+    - name: Checkout GitHub Action
       uses: actions/checkout@v4
 
-    - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+    - name: Setup .NET ${{ env.DOTNET_VERSION }} Environment
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: 'Resolve Project Dependencies Using Dotnet'
-      shell: pwsh 
+    - name: Resolve Project Dependencies Using Dotnet
+      shell: pwsh
       run: |
-        dotnet build --configuration Release --output ./output
-        popd
+        dotnet build $env:APP_PACKAGE_PATH --configuration Release --output ./output
 
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: SynapseLinkCompiledOutput
+        path: ./output/**
+        if-no-files-found: error
