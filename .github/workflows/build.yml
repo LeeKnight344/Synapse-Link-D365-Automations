@@ -21,10 +21,10 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Build Project
+      - name: Build Project ready for IIS
         shell: pwsh
         run: |
-          dotnet build $env:APP_PACKAGE_PATH --configuration Release --output ./output/SynapseLinkAPI_Compiled
+          dotnet publish $env:APP_PACKAGE_PATH --configuration Release --output ./output/SynapseLinkAPI_Compiled
 
       - name: Compress Output Folder
         shell: pwsh
