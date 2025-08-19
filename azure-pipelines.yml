@@ -25,5 +25,5 @@ stages:
       inputs:
         containerRegistry: 'Private Docker: The Sandbox'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        dockerfile: '$(Build.SourcesDirectory)/dockerfile'
         tags: '$(tag)'
