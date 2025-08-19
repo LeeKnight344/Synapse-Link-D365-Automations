@@ -1,6 +1,12 @@
-# ---------- Build ----------
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+# ---------- Build (Ubuntu) ----------
+FROM ubuntu:24.04 AS build
 WORKDIR /src
+
+# Install .NET SDK
+RUN apt-get update && \
+    apt-get install -y dotnet-sdk-8.0 && \
+    apt-get install -y dotnet-runtime-9.0
+
 
 # copy solution + projects (adjust names/paths if yours differ)
 COPY Synapse-Link-D365-Automations.sln ./
@@ -13,40 +19,25 @@ COPY . .
 WORKDIR /src/SynapseLinkAutomations.Api
 RUN dotnet publish -c Release -o /app/publish
 
-# ---------- Runtime with Edge ----------
-FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
-WORKDIR /app
+FROM ubuntu:24.04 AS runtime
 
-# Install Microsoft Edge (Linux)
-RUN apt-get update \
- && apt-get install -y wget gnupg apt-transport-https ca-certificates unzip \
- && wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /usr/share/keyrings/microsoft.gpg \
- && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" \
-    > /etc/apt/sources.list.d/microsoft-edge.list \
- && apt-get update \
- && apt-get install -y microsoft-edge-stable \
- && rm -rf /var/lib/apt/lists/* \
- && apt install -y apt-transport-https ca-certificates gnupg \
- && apt-get install wget \
- && wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.de \
- && dpkg -i packages-microsoft-prod.deb \
- && apt update 
 
-RUN apt-get update \
-&& apt-get install -y dotnet-sdk-9.0
-
-RUN apt-get update \
-&& apt-get install -y aspnetcore-runtime-9.0
-
-# (Linux) msedgedriver to match Edge
+# Install Microsoft Edge (Ubuntu) + matching WebDriver
 RUN set -eux; \
-    EDGE_VER="$(microsoft-edge --version | awk '{print $3}')" ; \
-    MAJOR="${EDGE_VER%%.*}" ; \
-    wget -q "https://msedgedriver.microsoft.com/139.0.3405.86/edgedriver_linux64.zip" -O /tmp/edgedriver.zip \
-      || wget -q "hhttps://msedgedriver.microsoft.com/139.0.3405.86/edgedriver_linux64.zip" -O /tmp/edgedriver.zip ; \
-    unzip -o /tmp/edgedriver.zip -d /usr/local/bin/ ; \
-    chmod +x /usr/local/bin/msedgedriver ; \
-    rm -f /tmp/edgedriver.zip
+    apt-get update; \
+    apt-get install -y --no-install-recommends wget gnupg ca-certificates apt-transport-https unzip; \
+    install -d -m 0755 /etc/apt/keyrings; \
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/keyrings/microsoft.gpg; \
+    echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge.list; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends microsoft-edge-stable; \
+    # Download the WebDriver that matches the installed Edge version
+    EDGE_VER="$(microsoft-edge --version | awk '{print $3}')"; \
+    wget -q "https://msedgedriver.azureedge.net/${EDGE_VER}/edgedriver_linux64.zip" -O /tmp/edgedriver.zip; \
+    unzip -o /tmp/edgedriver.zip -d /usr/local/bin/; \
+    chmod +x /usr/local/bin/msedgedriver; \
+    rm -f /tmp/edgedriver.zip; \
+    rm -rf /var/lib/apt/lists/*
 
 # copy published app
 COPY --from=build /app/publish ./
