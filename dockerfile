@@ -70,7 +70,7 @@ RUN set -eux; \
 COPY --from=build /app/publish ./
 
 # ASP.NET Core config
-ENV ASPNETCORE_URLS=http://+:8080 \
+ENV ASPNETCORE_URLS=http://+:5227 \
     DOTNET_RUNNING_IN_CONTAINER=true \
     # Helps some environments; harmless otherwise
     COMPlus_EnableDiagnostics=0
@@ -79,7 +79,7 @@ EXPOSE 8080
 
 # Optional: simple health check (adjust path if your app has a custom health endpoint)
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
-  CMD curl -fsS http://localhost:8080/ || exit 1
+  CMD curl -fsS http://localhost:5227/ || exit 1
 
 # Run the app
 # If your output DLL name differs, the ENTRYPOINT will still resolve the only *.dll present.
