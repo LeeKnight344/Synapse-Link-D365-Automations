@@ -26,5 +26,5 @@ stages:
         containerRegistry: 'Private Docker: The Sandbox'
         repository: 'synapse_auth_api'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        dockerfile: '$(Build.SourcesDirectory)/dockerfile'
         tags: '$(tag)'
