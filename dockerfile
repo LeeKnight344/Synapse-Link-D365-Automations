@@ -5,7 +5,7 @@ WORKDIR /src
 # Install .NET SDK
 RUN apt-get update && \
     apt-get install -y dotnet-sdk-8.0 && \
-    apt-get install -y dotnet-runtime-9.0
+    apt-get install -y dotnet-runtime-8.0
 
 
 # copy solution + projects (adjust names/paths if yours differ)
