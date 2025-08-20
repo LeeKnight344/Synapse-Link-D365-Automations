@@ -24,7 +24,7 @@ stages:
       displayName: Build an image
       inputs:
         containerRegistry: 'Private Docker: The Sandbox'
-        repository: 'synapse_auth_api'
+        repository: 'synapse_link_d365_authentication'
         command: 'buildAndPush'
         dockerfile: '$(Build.SourcesDirectory)/dockerfile'
         tags: '$(tag)'
